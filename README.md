@@ -13,6 +13,15 @@ http :8080
 http http://localhost:8080/dogWalkers name="dog jang"
 http PATCH "http://localhost:8080/dogWalkers/1" status=READY
 http http://localhost:8080/schedules start="2022-06-16" end="2022-06-17" dogWalker="http://localhost:8080/dogWalkers/1"
+
+
+http :8080/menus name="짬뽕"
+http :8080/menus name="탕수육"
+http :8080/menus name="팔보채"
+http :8080/menus name="볶음밥"
+
+http :8080/orders menus[]="http://localhost:8080/menus/4" menus[]="http://localhost:8080/menus/3"
+
 ```
 
 
