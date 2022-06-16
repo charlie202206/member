@@ -9,14 +9,10 @@ GidPod 내에 터미널을 열고(왼쪽 상단의 햄버거 버튼 > Terminal >
 mvn spring-boot:run
 
 
-   16  http :8080
-   17  http http://localhost:8080/dogWalkers name="dog jang"
-   18  http PATCH "http://localhost:8080/dogWalkers/1" status=READY
-   19  http http://localhost:8080/schedules start="2022-06-16" end="2022-06-17" dogWalker="dog jang"
-   20  http http://localhost:8080/schedules start="2022-06-16" end="2022-06-17" dogWalker=1
-   21  http http://localhost:8080/dogWalkers
-   22  http http://localhost:8080/schedules start="2022-06-16" end="2022-06-17" dogWalker="http://localhost:8080/dogWalkers/1"
-   23  http http://localhost:8080/schedules start="2022-06-18" end="2022-06-19" dogWalker="http://localhost:8080/dogWalkers/1"
+http :8080
+http http://localhost:8080/dogWalkers name="dog jang"
+http PATCH "http://localhost:8080/dogWalkers/1" status=READY
+http http://localhost:8080/schedules start="2022-06-16" end="2022-06-17" dogWalker="http://localhost:8080/dogWalkers/1"
 ```
 
 

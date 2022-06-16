@@ -1,5 +1,7 @@
 package com.demo.dogwalker.domain;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,6 +12,17 @@ public class DogWalker {
     
     String name;
 
+    @OneToMany
+    List<Schedule> schedules;
+
+
+    public List<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
+    }
 
     public String getName() {
         return name;
