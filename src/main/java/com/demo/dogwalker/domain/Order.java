@@ -25,6 +25,7 @@ public class Order {
 
     ////// Lifecycle 을 Order 와 같이 하는 경우 (Composition)
     @Embedded  // 1:1
+    @AttributeOverride(name="id", column=@Column(name="menuId")) //embed 하면서 order.id 와 menuId.id가 겹치므로 회피해주는 
     MenuId oneMenu;  
 
         public MenuId getOneMenu() {
@@ -82,7 +83,9 @@ public class Order {
             this.menus = menus;
         }
     
-    @OneToMany
+    @OneToMany(
+        mappedBy = "order"  //mappedBy 가 있으면 테이블이 그냥 2개 생성 (Order, OrderItemEntity) 없으면 중간 매핑 테이블이 하나 더 생겨서 3개가 생성(Order, OrderItemEntity, Order_OrderItemEntity)
+    )
     List<OrderItemEntity> orderItemEntities;
         public List<OrderItemEntity> getOrderItemEntities() {
             return orderItemEntities;
