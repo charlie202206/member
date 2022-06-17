@@ -7,7 +7,7 @@
 GidPod 내에 터미널을 열고(왼쪽 상단의 햄버거 버튼 > Terminal > New Terminal), 프로젝트가 잘 컴파일 되는지 확인합니다:
 ```
 mvn spring-boot:run
-
+test
 
 http :8080
 http http://localhost:8080/dogWalkers name="dog jang"
