@@ -10,19 +10,28 @@ mvn spring-boot:run
 test
 
 http :8080
-http http://localhost:8080/dogWalkers name="dog jang"
-http PATCH "http://localhost:8080/dogWalkers/1" status=READY
-http http://localhost:8080/schedules start="2022-06-16" end="2022-06-17" dogWalker="http://localhost:8080/dogWalkers/1"
+http http://localhost:8080/members name="Charlie" email="abc@abc.com" phone="000-0001-0002"
+//단순 1:1인경우(Embedded)
+http PATCH "http://localhost:8080/members/1" address[zipcode]="123123" address[detail]="seoul"
+//1:n으로 넣을경우(ElementCollection)
+http PATCH "http://localhost:8080/members/1" addresses:='[{"zipcode":"1233","detail":"seoul"},{"zipcode":"9999","detail":"busan"}]'
 
 
-http :8080/menus name="짬뽕"
-http :8080/menus name="탕수육"
-http :8080/menus name="팔보채"
-http :8080/menus name="볶음밥"
+//Repository 2개 사용한 경우 그냥 사용은 3개 테이블생김 (OneToMany <== 앞에 one이 자신의갯수)
+    @OneToMany(
+        mappedBy = "order"  //mappedBy 가 있으면 테이블이 그냥 2개 생성 (Order, OrderItemEntity) 없으면 중간 매핑 테이블이 하나 더 생겨서 3개가 생성(Order, OrderItemEntity, Order_OrderItemEntity)
+    )
+    List<OrderItemEntity> orderItemEntities;
 
-http :8080/orders menus[]="http://localhost:8080/menus/4" menus[]="http://localhost:8080/menus/3"
 
-```
+//Embedable 로 설정한 경우 같은 tran에 묶여 생명주기를 같이하게됨. (모 테이블 삭제시 자동삭제처리됨.)
+
+//LOGIN 처리.
+http http://localhost:8080/logins email="abc@abc.com" loginDate="2022-06-12"
+http PATCH http://localhost:8080/logins/2 email="abc@abc.com" logoutDate="2022-06-17"
+http POST http://localhost:8080/logins email="abc@abc.com" loginDate="2022-06-12"
+http DELETE http://localhost:8080/logins/2
+
 
 
 
